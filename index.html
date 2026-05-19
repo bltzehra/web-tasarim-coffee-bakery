@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costa's & Corner | Coffee & Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-left">
+            <i class="fa-solid fa-bars hamburger-menu" id="hamburger-icon" onclick="toggleSidebar()"></i>
+            <i class="fa-solid fa-arrow-left back-button" id="back-icon" style="display:none;" onclick="goHome()"></i>
+        </div>
+        
+        <div class="header-center" style="display: flex; align-items: center; gap: 15px;">
+            <img src="gorseller/logo.png" alt="Logo" style="height: 100px; border-radius: 100%;">
+            
+        </div>
+        
+        <div class="header-right">
+            <button class="cart-btn" onclick="openCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        
+        <div class="sidebar-header" style="display: flex; justify-content: center; align-items: center; padding: 30px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px;">
+            <img src="gorseller/logo.png" alt="Logo" style="height: 80px; width: 80px; object-fit: cover; border-radius: 50%; border: 2px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+        </div>
+        
+        <a href="#" onclick="goHome(); toggleSidebar();"><i class="fa-solid fa-house"></i> Anasayfa</a>
+        <a href="#" onclick="openOrderHistory(); toggleSidebar();"><i class="fa-solid fa-clock-rotate-left"></i> Sipariş Geçmişi</a>
+        <a href="#" onclick="openCart(); toggleSidebar();"><i class="fa-solid fa-basket-shopping"></i> Sepetim</a>
+        
+    </div>
+    <div id="sidebar-overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+    <main id="home-page" class="page-section active">
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="home-search" oninput="filterHomeProducts()" placeholder="Kahve, tatlı, içecek ara...">
+            </div>
+        </div>
+
+        <div class="categories-grid" id="categories-container">
+            <div class="category-card item-soguk" onclick="openCategory('soguk-icecekler')"><span>SOĞUK İÇECEKLER</span></div>
+            <div class="category-card item-turk" onclick="openCategory('turk-kahvesi')"><span>TÜRK KAHVESİ</span></div>
+            <div class="category-card item-cay" onclick="openCategory('caylar')"><span>ÇAYLAR</span></div>
+            <div class="category-card item-bakery" onclick="openCategory('bakery')"><span>BAKERY</span></div>
+            <div class="category-card item-es-sicak" onclick="openCategory('espresso-sicak')"><span>ESPRESSO BAZLI SICAK KAHVELER</span></div>
+            <div class="category-card item-es-soguk" onclick="openCategory('espresso-soguk')"><span>ESPRESSO BAZLI SOĞUK KAHVELER</span></div>
+            <div class="category-card item-pasta" onclick="openCategory('pastalar')"><span>PASTALAR</span></div>
+            <div class="category-card item-hepsi" onclick="openCategory('hepsi')"><span>HEPSİ</span></div>
+        </div>
+
+        <div class="featured-section" id="featured-section-area">
+            <div class="featured-badge-container">
+                <div class="featured-badge">🔥 ÖNE ÇIKANLAR</div>
+            </div>
+            <div class="products-grid" id="featured-products">
+                </div>
+        </div>
+        
+        <footer class="footer-text">
+            2026 Costa's & Corner Tüm Hakları Saklıdır
+        </footer>
+    </main>
+
+    <main id="category-page" class="page-section">
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="category-search" oninput="filterCategoryProducts()" placeholder="Ara...">
+            </div>
+        </div>
+        <div class="products-grid" id="category-products">
+            </div>
+    </main>
+
+    <main id="cart-page" class="page-section">
+        <div class="cart-container">
+            <div class="cart-left">
+                <div id="empty-cart-msg" class="white-card text-center">
+                    <h2 class="empty-title">Sepetiniz Boş</h2>
+                    <p class="empty-desc">Lezzetli menümüzü keşfedin.</p>
+                    <button onclick="goHome()" class="brown-btn menu-btn">MENÜ</button>
+                </div>
+                
+                <div class="white-card" id="checkout-form-card" style="display: none;">
+                    <h3 class="card-title">Sipariş Türü Seçimi</h3>
+                    
+                    <div class="order-info-row" id="field-name-row">
+                        <span class="fw-bold">Müşteri:</span> 
+                        <input type="text" id="customer-name" placeholder="Örn: Ad Soyad" style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%;">
+                    </div>
+                    
+                    <div class="order-info-row" id="field-phone-row">
+                        <span class="fw-bold">Telefon:</span> 
+                        <input type="tel" id="delivery-phone" placeholder="Örn: 0530 123 45 67" style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%;">
+                    </div>
+                    
+                    <div class="order-info-row">
+                        <span class="fw-bold">Sipariş Türü:</span> 
+                        <select id="order-type-select" onchange="toggleOrderFields()" style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%; cursor:pointer;">
+                            <option value="gel-al">Gel-Al</option>
+                            <option value="masada-ye">Masada Ye</option>
+                            <option value="paket">Paket</option>
+                        </select>
+                    </div>
+
+                    <div id="field-masada-ye" class="order-info-row" style="display: none;">
+                        <span class="fw-bold">Masa No:</span> 
+                        <input type="number" id="table-no" placeholder="Örn: 12" style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%;">
+                    </div>
+                    
+                    <div id="field-paket" class="order-info-row" style="display: none;">
+                        <span class="fw-bold">Adres:</span> 
+                        <input type="text" id="address-info" placeholder="Açık adres..." style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%;">
+                    </div>
+                    
+                    <div class="order-info-row">
+                        <span class="fw-bold">Ödeme:</span> 
+                        <select id="payment-method-select" style="border:none; border-bottom:1px solid #ccc; background:transparent; font-family:inherit; font-size:14px; outline:none; width:50%; cursor:pointer;">
+                            <option value="Nakit">Nakit</option>
+                            <option value="Kredi Kartı">Kredi Kartı</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-right">
+                <div class="white-card">
+                    <h3 class="card-title">Sipariş Özeti</h3>
+                    <div id="cart-items-list"></div>
+                    
+                    <div class="summary-row mt-15"><span class="fw-bold">Ara Toplam</span> <span id="subtotal" class="fw-bold">0.00₺</span></div>
+                    <hr class="dashed-line">
+                    <div class="summary-row text-gray"><span>KDV Tutarı</span> <span id="tax">0.00₺</span></div>
+                    <hr class="dashed-line">
+                    <div class="summary-row total-row"><span class="fw-bold">Genel Toplam:</span> <span id="total">0.00₺</span></div>
+                    
+                    <button class="brown-btn w-100 mt-15" id="complete-order-btn" style="display:none;" onclick="completeOrder()">Siparişi Tamamla</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="history-page" class="page-section">
+        <div class="white-card flex-between mb-20 history-top-banner">
+            <div>
+                <h2 class="history-main-title" style="font-size: 22px; font-weight: 700;">TOPLAM HARCAMA ÖZETİ</h2>
+                <p class="history-sub" style="color: gray; font-size: 14px; margin-top: 5px;">Coffe Bakery ile keyifli anlarınız.</p>
+            </div>
+            <div class="history-total-price" id="history-grand-total" style="font-size: 28px; font-weight: 600; color: #6b5b4c;">0.00 TL</div>
+        </div>
+        <div id="dynamic-history-container"></div>
+    </main>
+
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal-content text-center">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2 class="mt-15">Siparişiniz Alındı!</h2>
+            <p class="mt-15 text-gray">Bizi tercih ettiğiniz için teşekkür ederiz.</p>
+            <div class="order-details-box mt-15">
+                <p><span class="fw-bold">Sipariş No:</span> <span id="modal-order-no" style="color: #da3232;"></span></p>
+                <p><span class="fw-bold">Durum:</span> <span id="modal-time"></span></p>
+            </div>
+            <button class="brown-btn mt-20 w-100" onclick="closeModal()">Anasayfaya Dön</button>
+        </div>
+    </div>
+
+    <button class="floating-cart-btn" onclick="openCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="floating-badge" id="floating-cart-count">0</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
