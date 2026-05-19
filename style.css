@@ -1,0 +1,253 @@
+:root {
+    --bg-main: #fcfcfc;
+    --header-bg: #b49372;
+    --text-dark: #2c2c2c;
+    --text-gray: #888888;
+    --brand-font: 'Playfair Display', serif;
+    --ui-font: 'Poppins', sans-serif;
+    --red-btn: #dc3545;
+    --brown-btn: #b49372;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--ui-font); background-color: var(--bg-main); color: var(--text-dark); -webkit-font-smoothing: antialiased; }
+
+/* --- HEADER --- */
+.top-header {
+    background-color: var(--header-bg);
+    height: 75px; display: flex; justify-content: space-between; align-items: center;
+    padding: 0 40px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 99;
+}
+.header-left i { font-size: 26px; color: white; cursor: pointer; transition: 0.2s; }
+.header-left i:hover { opacity: 0.8; }
+.brand-title { font-family: var(--brand-font); font-size: 26px; color: #fff; font-weight: 700; letter-spacing: 0.5px; }
+.green-text { color: #97c279; }
+.header-right { display: flex; align-items: center; gap: 25px; }
+.header-order-btn {
+    background: white; color: var(--text-dark); border: none; padding: 6px 18px;
+    border-radius: 8px; font-weight: 500; cursor: pointer; font-family: var(--ui-font); font-size: 14px;
+}
+.cart-btn { background: none; border: none; font-size: 24px; color: white; cursor: pointer; }
+
+/* --- SIDEBAR --- */
+.sidebar {
+    height: 100%; width: 280px; position: fixed; top: 0; left: -280px;
+    background-color: white; z-index: 1000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+}
+.sidebar-header { background: var(--header-bg); color: white; padding: 25px 20px; font-size: 18px; font-weight: 600; letter-spacing: 1px; }
+.sidebar a { padding: 18px 20px; text-decoration: none; font-size: 15px; color: var(--text-dark); display: block; border-bottom: 1px solid #f5f5f5; font-weight: 400; }
+.sidebar a i { margin-right: 15px; width: 20px; text-align: center; color: var(--header-bg); }
+.sidebar a:hover { background: #fafafa; }
+.overlay { position: fixed; display: none; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,0.4); z-index: 999; }
+
+/* --- ORTAK ALANLAR --- */
+.page-section { display: none; padding: 35px 20px; max-width: 1200px; margin: 0 auto; }
+.page-section.active { display: block; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.text-center { text-align: center; }
+.fw-bold { font-weight: 600; }
+.text-gray { color: var(--text-gray); }
+.mt-15 { margin-top: 15px; }
+.mb-20 { margin-bottom: 20px; }
+
+/* --- ARAMA ÇUBUĞU --- */
+.search-container { display: flex; justify-content: center; margin-bottom: 35px; }
+.search-bar {
+    background: white; border-radius: 25px; padding: 10px 20px; width: 100%; max-width: 420px;
+    display: flex; align-items: center; border: 1px solid #e2e2e2; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.search-bar i { color: #999; font-size: 16px; }
+.search-bar input {
+    border: none; outline: none; margin-left: 12px; width: 100%;
+    font-family: var(--ui-font); font-size: 14px; color: #444;
+}
+
+/* --- KATEGORİ KARTLARI (250x250) --- */
+.categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; justify-items: center; margin-bottom: 50px; }
+.category-card {
+    width: 250px; height: 250px; background-color: #cbbba8; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease;
+    background-size: cover; background-position: center;
+}
+.category-card:hover { transform: translateY(-5px); }
+.category-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.45); z-index: 1;
+}
+.category-card span {
+    position: relative; z-index: 2; color: white; font-weight: 600; font-size: 16px; padding: 0 20px; letter-spacing: 0.5px;
+}
+
+/* Kategori Arkaplan Geçici Renk Grupları (Görseller yüklenene kadar ayırt edici olması için) */
+.item-soguk { background-image: url('gorseller/İCE.jpg.jpeg'); }
+.item-turk { background-image: url('gorseller/7.jpg'); }
+.item-cay { background-image: url('gorseller/caymenu.jpeg'); }
+.item-bakery { background-image: url('gorseller/BAKERY.jpg.jpeg'); }
+.item-es-sicak { background-image: url('gorseller/espressobazlısıcak.jpeg'); }
+.item-es-soguk { background-image: url('gorseller/espressobazlısoguk.jpeg'); }
+.item-pasta { background-image: url('gorseller/ppp.jpg.jpeg'); }
+.item-hepsi { background-image: url('gorseller/hepsi.jpeg'); }
+
+/* --- ÖNE ÇIKANLAR BAŞLIĞI --- */
+.featured-badge-container { display: flex; justify-content: center; margin-bottom: 30px; }
+.featured-badge {
+    background: white; padding: 8px 35px; border-radius: 25px; font-weight: 600;
+    font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #eaeaea;
+}
+
+/* --- ÜRÜN KARTLARI (430x230) --- */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 30px; justify-items: center; }
+.product-card {
+    width: 430px; background: white; border-radius: 18px;
+    display: flex; flex-direction: column; padding: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f0; transition: box-shadow 0.2s ease;
+}
+.product-main-layout { display: flex; width: 100%; height: 160px; }
+.img-container { position: relative; width: 150px; height: 150px; margin-right: 18px; flex-shrink: 0; }
+.product-img { width: 100%; height: 100%; background: #f2f2f2; border-radius: 14px; object-fit: cover; }
+.status-badge {
+    position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6);
+    color: white; font-size: 11px; padding: 3px 9px; border-radius: 6px; font-weight: 500;
+}
+.status-badge.out { background: rgba(192, 57, 43, 0.85); }
+
+.product-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.product-title { font-weight: 600; font-size: 16px; color: #222; }
+.product-desc { font-size: 12px; color: #7f8c8d; font-style: italic; line-height: 1.4; margin-top: 4px; }
+.product-price { font-weight: 700; font-size: 17px; color: #2c3e50; }
+
+/* Miktar Kontrolleri ve Sepet Butonları */
+.action-area { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.qty-controls { display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 3px; }
+.qty-btn { 
+    background: white; border: none; width: 24px; height: 24px; border-radius: 50%;
+    cursor: pointer; font-weight: bold; color: #444; box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+.qty-display { width: 26px; text-align: center; font-weight: 600; font-size: 13px;}
+.add-btn { 
+    background: #c3a683; color: white; border: none; padding: 7px 18px;
+    border-radius: 8px; font-weight: 500; cursor: pointer; font-family: var(--ui-font); font-size: 12px;
+}
+.add-btn:hover { background: var(--brown-btn); }
+
+/* Kahve Şeker Seçenekleri Alanı */
+.sugar-button-group { display: flex; gap: 8px; margin-top: 12px; border-top: 1px solid #f9f9f9; padding-top: 10px; }
+.sugar-btn { background: #f1ebd9; color: #7f6044; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid transparent; }
+.sugar-btn.active { background: #7f6044; color: white; }
+
+/* --- YÜZEN SEPET BUTONU --- */
+.floating-cart-btn {
+    position: fixed; bottom: 35px; right: 35px; width: 60px; height: 60px;
+    background: #e74c3c; border-radius: 50%; border: 3px solid white;
+    color: white; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+    display: flex; justify-content: center; align-items: center; z-index: 98;
+}
+.floating-badge {
+    position: absolute; top: -4px; right: -4px; background: white; color: #e74c3c;
+    width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: 700;
+    display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* --- SEPET & SİPARİŞ GEÇMİŞİ SAYFALARI --- */
+.cart-container { display: flex; gap: 30px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+.cart-left, .cart-right { width: 100%; max-width: 480px; }
+.white-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; border: 1px solid #f3f3f3; }
+
+.empty-title { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+.empty-desc { color: var(--text-gray); margin-bottom: 20px; font-size: 14px; }
+.brown-btn { background: var(--brown-btn); color: white; padding: 10px 30px; border-radius: 20px; border: none; font-weight: 500; font-size: 15px; cursor: pointer;}
+
+.card-title { font-size: 17px; font-weight: 600; margin-bottom: 18px; color: #111; }
+.order-info-row { margin-bottom: 12px; font-size: 14px; display: flex; }
+.order-info-row span.fw-bold { width: 110px; display: inline-block; color: #555; }
+
+.summary-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; margin-bottom: 12px; }
+.dashed-line { border: none; border-top: 1px dashed #dddddd; margin: 15px 0; }
+.total-row { font-size: 17px; margin-top: 15px; color: #000; }
+
+.history-top-banner { padding: 30px; border-left: 5px solid var(--brown-btn); }
+.history-main-title { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+.history-sub { color: var(--text-gray); font-size: 13px; margin-top: 2px; }
+.history-total-price { font-size: 26px; font-weight: 700; color: #534334; }
+.history-item-name { color: #2980b9; text-decoration: underline; flex: 1; margin: 0 15px; cursor: pointer; }
+
+.footer-text { text-align: center; font-size: 12px; color: var(--text-gray); margin-top: 60px; padding-bottom: 10px;}
+/* Form Elemanları */
+.custom-input { width: 100%; padding: 12px 15px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--ui-font); font-size: 14px; outline: none; background: #fafafa; transition: 0.3s; }
+.custom-input:focus { border-color: var(--header-bg); background: white; box-shadow: 0 0 5px rgba(180, 147, 114, 0.3); }
+.w-100 { width: 100%; }
+
+/* Sipariş Onay Modalı */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(5px); }
+.modal-content { background: white; padding: 40px 30px; border-radius: 20px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); animation: popIn 0.3s ease-out; }
+.success-icon { font-size: 65px; color: #2ecc71; margin-bottom: 10px; }
+.order-details-box { background: #fdfaf7; padding: 15px; border-radius: 10px; border: 1px dashed var(--header-bg); text-align: left; }
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Sipariş Geçmişi Kartları */
+.history-order-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--text-gray); }
+
+/* ==================================================== */
+/* --- MOBİL UYUM (RESPONSIVE) TASARIM KODLARI --- */
+/* ==================================================== */
+
+@media (max-width: 768px) {
+    /* Header Alanı Daraltması */
+    .top-header { padding: 0 15px; height: 70px; }
+    .brand-title { font-size: 20px; }
+    .header-left i, .cart-btn { font-size: 22px; }
+    
+    /* Ortak Boşluklar */
+    .page-section { padding: 20px 15px; }
+    .search-bar { max-width: 100%; }
+
+    /* Anasayfa Kategori Kartları (Mobilde yan yana 2 kare) */
+    .categories-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px; 
+        margin-bottom: 30px;
+    }
+    .category-card { width: 100%; height: 160px; border-radius: 12px; }
+    .category-card span { font-size: 14px; padding: 0 10px; line-height: 1.3; }
+
+    /* Ürün Kartları (Mobilde alt alta tam ekran, görsel solda) */
+    .products-grid { grid-template-columns: 1fr; gap: 15px; }
+    .product-card { width: 100%; min-height: auto; padding: 12px; border-radius: 12px;}
+    .product-main-layout { height: 120px; }
+    .img-container { width: 100px; height: 100px; margin-right: 12px; }
+    
+    /* Mobil Ürün Kartı Yazı Boyutları */
+    .product-title { font-size: 14px; margin-bottom: 2px;}
+    .product-desc { font-size: 11px; margin-top: 0; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .product-price { font-size: 15px; }
+    .qty-btn { width: 22px; height: 22px; font-size: 14px;}
+    .add-btn { padding: 6px 12px; font-size: 11px; }
+    .status-badge { font-size: 9px; padding: 3px 6px; top: 5px; left: 5px;}
+
+    /* Şeker Seçimi Butonları Mobilde Sığsın Diye */
+    .sugar-button-group { flex-wrap: wrap; justify-content: flex-start; gap: 6px; padding-top: 8px;}
+    .sugar-btn { padding: 4px 10px; font-size: 10px; }
+
+    /* Sepet & Sipariş Formları (Mobilde Alt Alta Gelir) */
+    .cart-container { flex-direction: column; gap: 20px; }
+    .cart-left, .cart-right { max-width: 100%; width: 100%; }
+    
+    /* Inputlar mobilde ekranı taşırmasın */
+    .order-info-row { flex-direction: column; align-items: flex-start; margin-bottom: 20px !important;}
+    .order-info-row span.fw-bold { width: 100% !important; margin-bottom: 8px; font-size: 13px;}
+    .order-info-row input, .order-info-row select { width: 100% !important; }
+
+    /* Sipariş Geçmişi Mobilde */
+    .history-top-banner { flex-direction: column; text-align: center; gap: 15px; padding: 20px; }
+    .history-main-title { font-size: 18px !important; }
+    .history-total-price { font-size: 24px !important; }
+    
+    /* Yüzen Sepet Butonunu Telefonda Biraz Küçült */
+    .floating-cart-btn { width: 55px; height: 55px; bottom: 20px; right: 20px; font-size: 20px; }
+}
